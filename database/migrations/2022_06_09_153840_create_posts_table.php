@@ -18,7 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title',50);
             $table->string('slug',60)->nullable();
             $table->text('body');
-            $table->string('author',30)->default('admin');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
