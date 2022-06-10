@@ -48,6 +48,8 @@ class User extends Authenticatable
     }
 
     public function UserFaker(){
-        
+        User::truncate();
+        factory(User::class,10)->create();
+        return response('Deleted old User Fake Records and Inserted New Records');
     }
 }
