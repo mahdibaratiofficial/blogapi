@@ -25,35 +25,34 @@ Route::get('docs', 'HomeController@index')->name('documentation');
  * Posts Routes
  */
 Route::get('posts', "PostsController@allPosts");
-Route::get('post/{IdOrSlugPost}', 'PostsController@GetPost');
-
+Route::get('post/{Posts}', 'PostsController@GetPost');
+Route::get("post/{Posts}/info", "PostsController@PostInfo");
+Route::get('{Posts}/categories',"PostsController@PostCategory");
 
 /**
  * Comments Routes
  */
 Route::get("comments", "CommentsController@AllComments");
-Route::get('comment/{IdOrSlugComment}', "CommentsController@GetComment");
+Route::get('comment/{Comments}', "CommentsController@GetComment");
 
 /**
  * Users Routes
  */
 Route::get('users', "UsersController@GetAllUser");
-Route::get('@{UserNameOrUserEmail}', "UsersController@GetUser");
-Route::get("@{UserNameOrUserEmail}/posts", "UserController@GetUserPosts");
-Route::get("postinfo", "UsersController@PostInfo");
+Route::get('@{User}', "UsersController@GetUser");
+Route::get("@{User}/posts", "UsersController@GetUserPosts");
 
 
 /**
  * Categories Routes
  */
 Route::get('categories',"CategoryController@AllCategory");
-Route::get('{PostSlugOrPostId}/categories',"CategoryController@PostCategory");
-Route::get('posts/{CategoryidOrCategoryName}',"CategoryController@CateGoriesOfEachPost");
-
-
+Route::get('category/{Category}',"CategoryController@GetCategory");
+Route::get('postsofcategories/{Category}',"CategoryController@PostsOFEachCategories");
 /**
  * 
  * Faker Routes
+ * Warning : If You Have Important Records in Your DB dont use these
  */
 Route::get('faker/post',"PostsController@PostFaker");
 Route::get('faker/comment',"CommentsController@CommentFaker");
