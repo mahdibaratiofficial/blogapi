@@ -2,8 +2,8 @@
 
 namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
-
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Posts extends Model
 {
@@ -26,5 +26,13 @@ class Posts extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories(){
+        return $this->belongsToMany(Category::class);
     }
 }
