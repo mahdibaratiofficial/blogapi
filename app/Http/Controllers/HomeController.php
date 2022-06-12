@@ -11,31 +11,44 @@ class HomeController extends Controller
         $routes = [
             'Get_InforMation' =>
             [
-                'Watch Posts' => 'http://YourHostName/api/posts',
-                'Watch special Post' => 'http://YourHostName/api/post/{slug_or_id}',
+                // post/{Posts}/info
+                // post/create
+                // post/{Posts}/update
+                // post/{Posts}/delete
+                "Table"=>"Posts:",
+                'Watch Posts' => 'http://YourHostName/api/posts', 
+                'Watch special Post' => 'http://YourHostName/api/post/{post_id}',
+                'Who posted this?' => "http://YourHostName/api/post/{post_id}/author",
+                'Posts of each Category' => "http://YourHostName/api/post/{post_id}/categories",//done
+                'Post Comments' => "http://YourHostName/api/post/{post_id}/comments",//done
+                "Table2"=>"Comments:",
                 'Watch Comments' => 'http://YourHostName/api/comments',
-                'watch special Comment' => 'http://YourHostName/api/comment/{id_or_author_name_or_author_email}',
+                'watch special Comment' => 'http://YourHostName/api/comment/{comment_id}',
+                'who send this comment?' => 'http://YourHostName/api/commentuser/{comment_id}',
+                "Table3"=>"Users:",
                 'Watch Users' => 'http://YourHostName/api/users',
-                'Watch Special User' => 'http://YourHostName/api/@{username_or_email}',
-                "Watch each user's posts" => "http://YourHostName/api/@{username_or_email}/posts",
-                'Who posted this?' => "http://YourHostName/api/postinfo",
+                'Watch Special User' => 'http://YourHostName/api/@{username}',
+                "Watch each user's posts" => "http://YourHostName/api/@{username}/posts",
+                "User Comments" => "http://YourHostName/api/@{username}/comments",
+                "Table4"=>"Category :",
                 'Categories' => 'http://YourHostName/api/categories',
-                'Post Categories' => 'http://YourHostName/api/{PostSlug_or_Postid}/categories',
-                'Posts of each Category' => "http://YourHostName/api/posts/{Categoryid_or_CategoryName}"
+                'watch category with id' => 'http://YourHostName/api/category/{category_id}',
+                'Post Categories' => 'http://YourHostName/api/postcategory/{category_id}',
             ],
             "Requirment Parameter For Request" => [
                 'Post' => [
                     'title',
-                    'body'
+                    'body',
+                    'user_id'
                 ],
                 'Comment' => [
-                    'email',
-                    'name',
-                    'post_id',
+                    'posts_id',
+                    'user_id',
                     'body'
                 ],
                 'User' => [
                     'name',
+                    'username',
                     'email',
                     'password'
                 ],
@@ -54,11 +67,11 @@ class HomeController extends Controller
                         "Require Method" => "POST"
                     ],
                     "Update" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/post/{post_id}/update",
                         "Require Method" => "PUT"
                     ],
                     "Delete" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/post/{post_id}/delete",
                         "Require Method" => "DELETE"
                     ]
                 ],
@@ -71,11 +84,11 @@ class HomeController extends Controller
                         "Require Method" => "POST"
                     ],
                     "Update" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/comment/{comment_is}/update",
                         "Require Method" => "PUT"
                     ],
                     "Delete" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/comment/{comment_id}/delete",
                         "Require Method" => "DELETE"
                     ]
                 ],
@@ -84,15 +97,15 @@ class HomeController extends Controller
                  */
                 "Users" => [
                     "Create" => [
-                        "Route" => "http://YourHostName/api/post/create",
+                        "Route" => "http://YourHostName/api/user/create",
                         "Require Method" => "POST"
                     ],
                     "Update" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/@{username}/update",
                         "Require Method" => "PUT"
                     ],
                     "Delete" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/@{username}/delete",
                         "Require Method" => "DELETE"
                     ]
                 ],
@@ -101,15 +114,15 @@ class HomeController extends Controller
                  */
                 "Category" => [
                     "Create" => [
-                        "Route" => "http://YourHostName/api/post/create",
+                        "Route" => "http://YourHostName/api/category/create",
                         "Require Method" => "POST"
                     ],
                     "Update" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/category/{category_id}/update",
                         "Require Method" => "PUT"
                     ],
                     "Delete" => [
-                        "Routes" => "",
+                        "Routes" => "http://YourHostName/api/category/{category_id}/delete",
                         "Require Method" => "DELETE"
                     ]
                 ]

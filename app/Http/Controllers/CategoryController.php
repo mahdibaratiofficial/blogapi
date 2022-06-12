@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Posts;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,9 +24,26 @@ class CategoryController extends Controller
         return response()->json(['data' => [$Category]]);
     }
 
-    public function CategoryFaker(){
-        Category::truncate();
-        factory(Category::class,10)->create();
-        return response('Old Fake Category Deleted and Inserted New Fake Records');
+    public function InsertCategory(CategoryRequest $CategoryRequest)
+    {
+        /**
+         * Insert $PostsRequest in Posts Table
+         */
+        Category::create($CategoryRequest->toArray());
+        return response("Category {$CategoryRequest['name']} Inserted !");
+    }
+
+    public function DeleteCategory(Category $Category)
+    {
+        $Category->delete();
+        return response("deleted!");
+    }
+
+    public function UpdateCategory(Category $Category, CategoryRequest $CategoryRequest)
+    {
+        $oldName=$Category->name;
+        $Required=['name'];
+        $Category->update(Requests_Handle($CategoryRequest,$Required));
+        return response("Category ({$oldName}) Updated to ({$CategoryRequest['name']}) ");
     }
 }
