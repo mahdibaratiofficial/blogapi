@@ -1,4 +1,4 @@
-<?php
+:<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',30);
+            $table->string('name',30)->unique();
             $table->timestamps();
         });
     }
