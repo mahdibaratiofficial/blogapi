@@ -4,6 +4,8 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Http\Requests\PostsRequest;
+use Egulias\EmailValidator\Warning\Comment;
 
 class Posts extends Model
 {
@@ -15,7 +17,7 @@ class Posts extends Model
         'title',
         'body',
         'slug',
-        'author'
+        'user_id'
     ];
 
 
@@ -34,5 +36,9 @@ class Posts extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function Comments(){
+        return $this->hasMany(Comments::class);
     }
 }

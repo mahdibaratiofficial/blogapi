@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','username'
     ];
 
     /**
@@ -51,5 +51,9 @@ class User extends Authenticatable
         User::truncate();
         factory(User::class,10)->create();
         return response('Deleted old User Fake Records and Inserted New Records');
+    }
+
+    public function Comments(){
+        return $this->hasMany(Comments::class);
     }
 }
