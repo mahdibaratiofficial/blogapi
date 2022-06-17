@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'username'=>'required|min:3|max:30',
             'email'=>'required|min:10|max:50',
             'name'=>'required|min:3|max:40',
-            'password'=>'required|min:10|max:50'
+            'password'=>'required|min:5|max:50'
         ];
     }
 }

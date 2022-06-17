@@ -60,8 +60,13 @@ class FakerController extends Controller
             $user->posts()->saveMany(factory(Posts::class, rand(1, 5))->make());
             $user->comments()->saveMany(factory(Comments::class, rand(1, 3))->make());
         });
-
-
         $this->CategoryFaker();
+
+        return response()->json(['Fake Data'=>[
+            'Posts'=>Posts::all(),
+            'Comments'=>Comments::all(),
+            'Users'=>User::all(),
+            'Categories'=>Category::all()
+        ]]);
     }
 }
